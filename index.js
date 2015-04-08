@@ -31,14 +31,24 @@ net.createServer(function (client) {
 
 var gpio = require('rpi-gpio');
 
-gpio.setup(12, gpio.DIR_OUT, write);
+gpio.setup(12, gpio.DIR_OUT, callback);
 
-function write() {
-    gpio.write(12, true, function(err) {
-        if (err) throw err;
-        console.log('Written to pin');
-    });
+function callback() {
+
+    setInterval(function() {
+        delayedWrite(12, true, function(err) {
+            if (err) throw err;
+            console.log('Written to pin');
+        });
+    }, 1000);
+
 }
 
-// setInterval(write, 1000);
+function delayedWrite(pin, value, callback) {
+    setTimeout(function() {
+        gpio.write(pin, value, callback);
+    }, 500);
+}
+
+
 
