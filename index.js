@@ -33,24 +33,25 @@ var gpio = require('rpi-gpio');
 
 gpio.setup(12, gpio.DIR_OUT, callback);
 
-var on = false;
-
+var val = false;
 function callback(err) {
 
     if (err) throw err;
 
-    on = !on;
-    delayedWrite(12, on, function(err) {
-        if (err) throw err;
-        console.log('Written to pin');
-    });
+    setInterval(function() {
+        val = !val;
+        delayedWrite(12, val, function(err) {
+            if (err) throw err;
+            console.log('Written to pin');
+        });
+    }, 1000);
 
 }
 
 function delayedWrite(pin, value, callback) {
     setTimeout(function() {
         gpio.write(pin, value, callback);
-    }, 200);
+    }, 500);
 }
 
 
