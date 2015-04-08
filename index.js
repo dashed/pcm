@@ -25,7 +25,7 @@ var processData = function(chunk) {
 
 var client = net.connect({
     port: 3333,
-    host: '192.168.0.1'
+    host: 'boop'
 },
 function() {
   console.log('connected to arecord');
