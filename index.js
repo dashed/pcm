@@ -40,8 +40,6 @@ function callback(err) {
     if (err) throw err;
 
     on = !on;
-
-    on = !on;
     delayedWrite(12, on, function(err) {
         if (err) throw err;
         console.log('Written to pin');
