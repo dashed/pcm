@@ -1,12 +1,6 @@
 var net = require('net');
 var _ = require('lodash');
 
-var client = net.connect({
-    port: 3333
-}, function() {
-    console.log('connected to arecord');
-});
-
 function parseData(chunk, idx) {
     return chunk.readInt16LE(idx*2);
 }
@@ -29,5 +23,11 @@ var processData = function(chunk) {
     console.log(status + "\r");
 }
 
-client.on('data', _.throttle(processData, 100));
+net.createServer(function (client) {
+    client.on('data', _.throttle(processData, 100));
+}).listen(3333);
+
+
+
+
 
