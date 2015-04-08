@@ -33,7 +33,9 @@ var gpio = require('rpi-gpio');
 
 gpio.setup(12, gpio.DIR_OUT, callback);
 
-function callback() {
+function callback(err) {
+
+    if (err) throw err;
 
     setInterval(function() {
         delayedWrite(12, true, function(err) {
