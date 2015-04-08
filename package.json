@@ -3,5 +3,8 @@
   "dependencies": {
     "lodash": "^3.6.0",
     "rpi-gpio": "^0.5.1"
+  },
+  "scripts": {
+    "start": "node index.js"
   }
 }
