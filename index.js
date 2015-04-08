@@ -23,9 +23,14 @@ var processData = function(chunk) {
     console.log(status + "\r");
 }
 
-net.createServer(function (client) {
-    client.on('data', _.throttle(processData, 100));
-}).listen(3333);
+var client = net.connect({
+    port: 3333
+},
+function() {
+  console.log('connected to arecord');
+});
+
+client.on('data', _.throttle(processData, 100));
 
 
 
